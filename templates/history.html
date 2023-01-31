@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transactions History
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Stock-Symbol</th>
+                <th scope="col">Stock-Price At Time of Transaction</th>
+                <th scope="col">Number of Shares Bought/Sold</th>
+                <th scope="col">Date and Time of Transaction</th>
+            </tr>
+            </tr><i>*** Please note that if the # of shares indicated is a positive number, it represents that shares were bought, and if the # of shares indicated is a negative number, it represents that shares were sold ***</i></tr>
+        </thead>
+        <tbody>
+            {% for big in bigs %}
+            <tr>
+                <td scope="row">{{ big.stock_symbol }}</td>
+                <td>{{ big.stock_price }}</td>
+                <td>{{ big.number_of_shares }}</td>
+                <td>{{ big.time_of_purchase }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

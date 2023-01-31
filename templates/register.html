@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post" id="myForm">
+        <div class="form-group">
+            <label for="us">Username</label>
+            <input autocomplete="off" name="username" placeholder="Username" type="text" id="us" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input autocomplete="off" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <label>Confirmation</label>
+            <input autocomplete="off" name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <div class="form-group">
+            <label>The password entered must contain at least 10 characters (at least 5 letters and 3 numbers)</label>
+        </div>
+        <button class="btn btn-primary" type="submit" id="reg">Register</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        document.getElementById('reg').addEventListener("click", function(event) {
+            event.preventDefault();
+        });
+        let button = document.getElementById('reg');
+        button.onclick = function() {
+            let input = document.getElementById('us');
+            $.get('/check?username=' + input.value, function(data) {
+                if (data == false) {
+                    alert("You were not registered, because the username you entered has already been taken. Please try another username!");
+                }
+                if (data == true) {
+                    document.getElementById("myForm").submit();
+                }
+            });
+        };
+    </script>
+
+{% endblock %}
+

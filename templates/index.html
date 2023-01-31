@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User Information
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Stock-Symbol</th>
+                <th scope="col">Stock-Price</th>
+                <th scope="col">Number of Shares</th>
+                <th scope="col">Total Stock Holding</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td scope="row">{{ stock.stock_symbol }}</td>
+                <td>{{ stock.stock_price | usd  }}</td>
+                <td>{{ stock.total_shares }}</td>
+                <td>{{ (stock.stock_price * stock.total_shares) | usd  }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="row">Cash Balance</th>
+                <td>{{ current_cash | usd  }}</th>
+            </tr>
+        </thead>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="row">Grand Total</th>
+                <td>{{ grand_total | usd  }}</th>
+            </tr>
+        </thead>
+    </table>
+{% endblock %}
